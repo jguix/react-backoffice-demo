@@ -5,7 +5,7 @@ export const BOHeader: FC = () => {
   return (
     <>
       <span>
-        <Link to="/">Customers</Link>
+        <Link to="/customers">Customers</Link>
       </span>
       <span> | </span>
       <span>
