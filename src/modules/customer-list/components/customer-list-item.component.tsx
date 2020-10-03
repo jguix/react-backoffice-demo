@@ -6,7 +6,7 @@ type Props = {
   customer: Customer;
 };
 
-export const RnCustomerListItem: FC<Props> = ({ customer }) => {
+export const BOCustomerListItem: FC<Props> = ({ customer }) => {
   return (
     <Link key={customer.id} to={`/customer/${customer.id}`}>
       <div>{customer.name}</div>

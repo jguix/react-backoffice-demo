@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { ApplicationStore } from '../../../store/store';
 import { productCommands } from '../../product/product.commands';
 import { Product } from '../../product/product.types';
-import { RnProductListItem } from './product-list-item.component';
+import { BOProductListItem } from './product-list-item.component';
 import { useHistory } from 'react-router-dom';
 
 const LIMIT = 10;
 
-export const RnProductList: FC = () => {
+export const BOProductList: FC = () => {
   const history = useHistory();
 
   const products = useSelector<ApplicationStore, Product[]>((state) => {
@@ -44,7 +44,7 @@ export const RnProductList: FC = () => {
       {isError && <div>Error loading products, please refresh page.</div>}
 
       {products?.map((product: Product) => (
-        <RnProductListItem key={product.id} product={product} />
+        <BOProductListItem key={product.id} product={product} />
       ))}
 
       {products?.length > 0 && (

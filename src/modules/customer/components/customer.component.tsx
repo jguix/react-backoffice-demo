@@ -6,7 +6,7 @@ import { Customer } from '../../customer/customer.types';
 import { customerCommands } from '../customer.commands';
 import { useHistory } from 'react-router-dom';
 
-export const RnCustomer: FC = () => {
+export const BOCustomer: FC = () => {
   const history = useHistory();
   const { id: idString } = useParams<{ id: string }>();
   const customerId = (idString && parseInt(idString)) || undefined;

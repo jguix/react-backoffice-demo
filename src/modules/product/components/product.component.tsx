@@ -6,7 +6,7 @@ import { Product } from '../../product/product.types';
 import { productCommands } from '../product.commands';
 import { useHistory } from 'react-router-dom';
 
-export const RnProduct: FC = () => {
+export const BOProduct: FC = () => {
   const history = useHistory();
   const { id: idString } = useParams<{ id: string }>();
   const productId = (idString && parseInt(idString)) || undefined;

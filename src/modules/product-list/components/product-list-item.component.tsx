@@ -6,7 +6,7 @@ type Props = {
   product: Product;
 };
 
-export const RnProductListItem: FC<Props> = ({ product }) => {
+export const BOProductListItem: FC<Props> = ({ product }) => {
   return (
     <Link key={product.id} to={`/product/${product.id}`}>
       <div>{product.name}</div>

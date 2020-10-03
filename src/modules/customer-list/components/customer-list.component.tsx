@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { ApplicationStore } from '../../../store/store';
 import { customerCommands } from '../../customer/customer.commands';
 import { Customer } from '../../customer/customer.types';
-import { RnCustomerListItem } from './customer-list-item.component';
+import { BOCustomerListItem } from './customer-list-item.component';
 import { useHistory } from 'react-router-dom';
 
 const LIMIT = 10;
 
-export const RnCustomerList: FC = () => {
+export const BOCustomerList: FC = () => {
   const history = useHistory();
 
   const customers = useSelector<ApplicationStore, Customer[]>((state) => {
@@ -44,7 +44,7 @@ export const RnCustomerList: FC = () => {
       {isError && <div>Error loading customers, please refresh page.</div>}
 
       {customers?.map((customer: Customer) => (
-        <RnCustomerListItem key={customer.id} customer={customer} />
+        <BOCustomerListItem key={customer.id} customer={customer} />
       ))}
 
       {customers?.length > 0 && (
