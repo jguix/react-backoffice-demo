@@ -4,10 +4,11 @@ import { productReducer, ProductStore } from '../modules/product/product.reducer
 import { customerReducer, CustomerStore } from '../modules/customer/customer.reducer';
 import { customerListReducer, CustomerListStore } from '../modules/customer-list/customer-list.reducer';
 import { productListReducer, ProductListStore } from '../modules/product-list/product-list.reducer';
+import { authReducer, AuthStore } from '../modules/auth/auth.reducer';
 
 export type EntitiesStore = CustomerStore & ProductStore;
 
-export type UIStore = CustomerListStore & ProductListStore;
+export type UIStore = AuthStore & CustomerListStore & ProductListStore;
 
 export type ApplicationStore = {
   entities: EntitiesStore;
@@ -20,6 +21,7 @@ export const entitiesReducer = combineReducers({
 });
 
 export const uiReducer = combineReducers({
+  auth: authReducer,
   customerList: customerListReducer,
   productList: productListReducer,
 });
