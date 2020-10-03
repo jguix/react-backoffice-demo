@@ -13,10 +13,11 @@ const App = () => {
       <RnHeader />
       <Route path="/products" component={RnProductList} />
       <Route path="/product/:id" component={RnProduct} />
-      <Route exact path="/product" component={RnProduct} />
-      <Route exact path="/" component={RnCustomerList} />
+      <Route path="/product" exact component={RnProduct} />
+      <Route path="/customers" component={RnCustomerList} />
       <Route path="/customer/:id" component={RnCustomer} />
-      <Route exact path="/customer" component={RnCustomer} />
+      <Route path="/customer" exact component={RnCustomer} />
+      <Route path="/" exact component={RnCustomerList} />
     </div>
   );
 };
