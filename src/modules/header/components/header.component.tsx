@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { ApplicationStore } from '../../../store/store';
 import { authCommands } from '../../auth/auth.commands';
+import './header.component.css';
 
 export const BOHeader: FC = () => {
   const history = useHistory();
@@ -23,9 +24,9 @@ export const BOHeader: FC = () => {
       </span>
       <span> | </span>
       <span>
-        <a href="" onClick={logout}>
+        <button className="buttonLink" onClick={logout}>
           Logout
-        </a>
+        </button>
       </span>
     </>
   ) : (
