@@ -277,12 +277,6 @@
       "name": "Inés Meraz"
     },
     {
-      "address": "6588 Tafoya Travesía, 85556, Motril Esperanza, Montserrat",
-      "email": "Amalia_Ortiz@hotmail.com",
-      "id": 47,
-      "name": "Amalia Ortiz"
-    },
-    {
       "address": "5044 María Luisa Extramuros, 24581, Estepona Lorenahaven, Bulgaria",
       "email": "Ramn79@hotmail.com",
       "id": 48,
@@ -605,6 +599,12 @@
       "email": "a.merino_saez@gmail.com",
       "name": "Abel Merino",
       "id": 101
+    },
+    {
+      "address": "Carretera de la Guardia Civil, S/N, Vallecas, Madrid",
+      "email": "amalia.vespin@linkedin.com",
+      "name": "Amalia Vespín",
+      "id": 102
     }
   ],
   "products": [
