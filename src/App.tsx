@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { PrivateRoute } from './modules/auth/components/private-route.component';
 import { BOLogin } from './modules/auth/components/login.component';
@@ -11,21 +13,23 @@ import { BOProduct } from './modules/product/components/product.component';
 
 const App = () => {
   return (
-    <div className="App">
-      <BOHeader />
+    <Provider store={store}>
       <HashRouter>
-        <Switch>
-          <Route exact path="/login" component={BOLogin} />
-          <PrivateRoute path="/customers" component={BOCustomerList} />
-          <PrivateRoute path="/customer/:id" component={BOCustomer} />
-          <PrivateRoute path="/customer" exact component={BOCustomer} />
-          <PrivateRoute path="/products" component={BOProductList} />
-          <PrivateRoute path="/product/:id" component={BOProduct} />
-          <PrivateRoute path="/product" exact component={BOProduct} />
-          <Redirect from="/" to="/customers" />
-        </Switch>
+        <div className="App">
+          <BOHeader />
+          <Switch>
+            <Route exact path="/login" component={BOLogin} />
+            <PrivateRoute path="/customers" component={BOCustomerList} />
+            <PrivateRoute path="/customer/:id" component={BOCustomer} />
+            <PrivateRoute path="/customer" exact component={BOCustomer} />
+            <PrivateRoute path="/products" component={BOProductList} />
+            <PrivateRoute path="/product/:id" component={BOProduct} />
+            <PrivateRoute path="/product" exact component={BOProduct} />
+            <Redirect from="/" to="/customers" />
+          </Switch>
+        </div>
       </HashRouter>
-    </div>
+    </Provider>
   );
 };
 
