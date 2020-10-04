@@ -6,7 +6,7 @@ export const BOLogin: FC = () => {
   const history = useHistory();
 
   const login = () => {
-    authCommands.login().then(() => history.push('/customers'));
+    authCommands.login().then(() => history.push('/'));
   };
 
   return (
