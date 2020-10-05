@@ -14,15 +14,9 @@
     },
     {
       "address": "1583 Briones Carretera, 65636, Inca Catalina, Mauritania",
-      "email": "Antonio.Vazquez@hotmail.com",
+      "email": "Antonio.Vazquez@gmail.com",
       "id": 3,
       "name": "Antonio Vázquez"
-    },
-    {
-      "address": "12574 Mercedes Escalinata, 82374, Zamora Ester, Bélgica",
-      "email": "Catalina8@gmail.com",
-      "id": 4,
-      "name": "Catalina Cortéz DDS"
     },
     {
       "address": "9979 Antonia Sector, 38635, San Sebastían de los Reyes Leticia, Kazajistan",
@@ -337,10 +331,10 @@
       "name": "Rubén Ordóñez"
     },
     {
-      "address": "404 Barragán Avenida, 78387, Linares María José, Islas Faro",
-      "email": "Alejandra.Ojeras@hotmail.com",
+      "address": "404 Barragán Avenida, 78387, Linares María José, Islas Feroe",
+      "email": "Alejandra.Ojeda@hotmail.com",
       "id": 58,
-      "name": "Alejandra Ojeras Sr."
+      "name": "Alejandra Ojeda"
     },
     {
       "address": "27206 Mónica Polígono, 86223, Juliobury, Bulgaria",
@@ -1707,12 +1701,6 @@
       "price": 225
     },
     {
-      "id": 184,
-      "name": "Artesanal Granito Queso",
-      "photo": "http://placeimg.com/640/480/people",
-      "price": 743
-    },
-    {
       "id": 185,
       "name": "Práctico Acero Mesa",
       "photo": "http://placeimg.com/640/480/technics",
@@ -1816,9 +1804,9 @@
     },
     {
       "id": 202,
-      "name": "Artesanal Algodón Camiseta",
-      "photo": "http://placeimg.com/640/480/people",
-      "price": 198
+      "name": "Artesanal Algodón Camisetas",
+      "photo": "http://placeimg.com/640/480/tshirts",
+      "price": "220"
     },
     {
       "id": 203,
@@ -1980,7 +1968,7 @@
       "id": 229,
       "name": "Artesanal Algodón Gorro",
       "photo": "http://placeimg.com/640/480/nature",
-      "price": 813
+      "price": "820"
     },
     {
       "id": 230,
@@ -2100,7 +2088,7 @@
       "id": 249,
       "name": "Artesanal Acero Bacon",
       "photo": "http://placeimg.com/640/480/technics",
-      "price": 335
+      "price": "320"
     },
     {
       "id": 250,
@@ -2625,12 +2613,6 @@
       "price": 456
     },
     {
-      "id": 337,
-      "name": "Artesanal Granito Sopa",
-      "photo": "http://placeimg.com/640/480/sports",
-      "price": 632
-    },
-    {
       "id": 338,
       "name": "Guapo Acero Ordenador",
       "photo": "http://placeimg.com/640/480/transport",
@@ -3036,7 +3018,8 @@
       "id": 405,
       "name": "Artesanal Acero Guantes",
       "photo": "http://placeimg.com/640/480/fashion",
-      "price": 304
+      "price": 304,
+      "email": "3040"
     },
     {
       "id": 406,
@@ -3454,9 +3437,9 @@
     },
     {
       "id": 475,
-      "name": "Artesanal Acero Bacon",
+      "name": "Artesanal Acero Baldosa",
       "photo": "http://placeimg.com/640/480/technics",
-      "price": 317
+      "price": "318"
     },
     {
       "id": 476,

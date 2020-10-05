@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { authCommands } from '../auth.commands';
+import './login.component.scss';
 
 export const BOLogin: FC = () => {
   const history = useHistory();
@@ -10,22 +11,30 @@ export const BOLogin: FC = () => {
   };
 
   return (
-    <>
-      <h1>Login</h1>
+    <div className="loginPage">
+      <div className="loginContent">
+        <div className="boTitle">backoffice</div>
 
-      <div>
-        <label>
-          Username:&nbsp;
-          <input type="text" name="username" />
-        </label>
+        <div className="loginForm">
+          <form>
+            <div className="loginTitle">Start Session</div>
+
+            <div className="loginLabel">
+              <label>Email</label>
+            </div>
+            <input className="loginField" type="text" name="username" />
+
+            <div className="loginLabel">
+              <label>Password</label>
+            </div>
+            <input className="loginField" type="password" name="password" />
+
+            <button className="loginButton" onClick={login}>
+              Login
+            </button>
+          </form>
+        </div>
       </div>
-      <div>
-        <label>
-          Password:&nbsp;
-          <input type="password" name="password" />
-        </label>
-      </div>
-      <button onClick={login}>Login</button>
-    </>
+    </div>
   );
 };

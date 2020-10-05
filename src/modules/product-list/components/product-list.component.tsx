@@ -5,8 +5,11 @@ import { productCommands } from '../../product/product.commands';
 import { Product } from '../../product/product.types';
 import { BOProductListItem } from './product-list-item.component';
 import { useHistory } from 'react-router-dom';
+import { BOPageTitle } from '../../shared/components/page-header.component';
+import '../../../theme/index.scss';
 
 const LIMIT = 10;
+const IMAGE_URL = 'https://bit.ly/2StaKsy';
 
 export const BOProductList: FC = () => {
   const history = useHistory();
@@ -36,23 +39,25 @@ export const BOProductList: FC = () => {
 
   return (
     <>
-      <h1>Products</h1>
-      <button onClick={createProduct}>Create product</button>
-      <hr />
+      <BOPageTitle title="Products" backgroundImageUrl={IMAGE_URL} />
+      <div className="page">
+        <button onClick={createProduct}>Create product</button>
 
-      {isLoading && !products?.length && <div>Loading products...</div>}
-      {isError && <div>Error loading products, please refresh page.</div>}
+        {isLoading && !products?.length && <div>Loading products...</div>}
+        {isError && <div>Error loading products, please refresh page.</div>}
 
-      {products?.map((product: Product) => (
-        <BOProductListItem key={product.id} product={product} />
-      ))}
-
-      {products?.length > 0 && (
-        <div>
-          <hr />
-          {isLoading ? <div>Loading products...</div> : <button onClick={incrementPage}>Load next {LIMIT}</button>}
+        <div className="list">
+          {products?.map((product: Product) => (
+            <BOProductListItem key={product.id} product={product} />
+          ))}
         </div>
-      )}
+
+        {products?.length > 0 && (
+          <div>
+            {isLoading ? <div>Loading products...</div> : <button onClick={incrementPage}>Load next {LIMIT}</button>}
+          </div>
+        )}
+      </div>
     </>
   );
 };

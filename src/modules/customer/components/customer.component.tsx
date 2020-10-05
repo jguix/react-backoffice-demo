@@ -5,6 +5,10 @@ import { ApplicationStore } from '../../../store/store';
 import { Customer } from '../../customer/customer.types';
 import { customerCommands } from '../customer.commands';
 import { useHistory } from 'react-router-dom';
+import { BOPageTitle } from '../../shared/components/page-header.component';
+import '../../../theme/index.scss';
+
+const IMAGE_URL = 'https://bit.ly/33uC3J9';
 
 export const BOCustomer: FC = () => {
   const history = useHistory();
@@ -46,7 +50,7 @@ export const BOCustomer: FC = () => {
   };
 
   const navigateBack = () => history.goBack();
-  const navigateToCustomers = () => history.push('/');
+  const navigateToCustomers = () => history.push('/customers');
 
   const onSave = () => {
     if (customer) {
@@ -94,38 +98,62 @@ export const BOCustomer: FC = () => {
 
   return (
     <>
-      <h1>Edit customer</h1>
+      <BOPageTitle title="Edit Customer" backgroundImageUrl={IMAGE_URL} />
+
       {modifiedCustomer && (
-        <form onSubmit={onSave}>
+        <form className="pageForm" onSubmit={onSave}>
           {modifiedCustomer.id && (
-            <div>
-              <label>
-                Id:&nbsp;
-                <input type="text" value={modifiedCustomer.id} disabled />
-              </label>
+            <div className="formField">
+              <div className="formLabel">
+                <label>Id</label>
+              </div>
+              <input className="formInput" type="text" value={modifiedCustomer.id} disabled />
             </div>
           )}
-          <div>
-            <label>
-              Name:&nbsp;
-              <input type="text" name="name" value={modifiedCustomer.name} onChange={onFieldChange} />
-            </label>
+          <div className="formField">
+            <div className="formLabel">
+              <label>Name</label>
+            </div>
+            <input
+              className="formInput"
+              type="text"
+              name="name"
+              value={modifiedCustomer.name}
+              onChange={onFieldChange}
+            />
           </div>
-          <div>
-            <label>
-              Email:&nbsp;
-              <input type="text" name="email" value={modifiedCustomer.email} onChange={onFieldChange} />
-            </label>
+          <div className="formField">
+            <div className="formLabel">
+              <label>Email</label>
+            </div>
+            <input
+              className="formInput"
+              type="text"
+              name="email"
+              value={modifiedCustomer.email}
+              onChange={onFieldChange}
+            />
           </div>
-          <div>
-            <label>
-              Address:&nbsp;
-              <input type="text" name="address" value={modifiedCustomer.address} onChange={onFieldChange} />
-            </label>
+          <div className="formField">
+            <div className="formLabel">
+              <label>Address</label>
+            </div>
+            <input
+              className="formInput"
+              type="text"
+              name="address"
+              value={modifiedCustomer.address}
+              onChange={onFieldChange}
+            />
           </div>
-          <hr />
-          <button type="submit">Save</button>&nbsp;
-          {customerId && <button onClick={onDelete}>Delete</button>}
+          <button className="formButton" type="submit">
+            Save
+          </button>
+          {customerId && (
+            <button className="formButton" onClick={onDelete}>
+              Delete
+            </button>
+          )}
         </form>
       )}
     </>

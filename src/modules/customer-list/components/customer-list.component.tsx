@@ -5,8 +5,11 @@ import { customerCommands } from '../../customer/customer.commands';
 import { Customer } from '../../customer/customer.types';
 import { BOCustomerListItem } from './customer-list-item.component';
 import { useHistory } from 'react-router-dom';
+import { BOPageTitle } from '../../shared/components/page-header.component';
+import '../../../theme/index.scss';
 
 const LIMIT = 10;
+const IMAGE_URL = 'https://bit.ly/33sx3Vu';
 
 export const BOCustomerList: FC = () => {
   const history = useHistory();
@@ -36,23 +39,25 @@ export const BOCustomerList: FC = () => {
 
   return (
     <>
-      <h1>Customers</h1>
-      <button onClick={createCustomer}>Create customer</button>
-      <hr />
+      <BOPageTitle title="Customers" backgroundImageUrl={IMAGE_URL} />
+      <div className="page">
+        <button onClick={createCustomer}>Create customer</button>
 
-      {isLoading && !customers?.length && <div>Loading customers...</div>}
-      {isError && <div>Error loading customers, please refresh page.</div>}
+        {isLoading && !customers?.length && <div>Loading customers...</div>}
+        {isError && <div>Error loading customers, please refresh page.</div>}
 
-      {customers?.map((customer: Customer) => (
-        <BOCustomerListItem key={customer.id} customer={customer} />
-      ))}
-
-      {customers?.length > 0 && (
-        <div>
-          <hr />
-          {isLoading ? <div>Loading customers...</div> : <button onClick={incrementPage}>Load next {LIMIT}</button>}
+        <div className="list">
+          {customers?.map((customer: Customer) => (
+            <BOCustomerListItem key={customer.id} customer={customer} />
+          ))}
         </div>
-      )}
+
+        {customers?.length > 0 && (
+          <div>
+            {isLoading ? <div>Loading customers...</div> : <button onClick={incrementPage}>Load next {LIMIT}</button>}
+          </div>
+        )}
+      </div>
     </>
   );
 };

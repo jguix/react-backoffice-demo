@@ -5,6 +5,10 @@ import { ApplicationStore } from '../../../store/store';
 import { Product } from '../../product/product.types';
 import { productCommands } from '../product.commands';
 import { useHistory } from 'react-router-dom';
+import { BOPageTitle } from '../../shared/components/page-header.component';
+import '../../../theme/index.scss';
+
+const IMAGE_URL = 'https://bit.ly/2GyBHs6';
 
 export const BOProduct: FC = () => {
   const history = useHistory();
@@ -46,7 +50,7 @@ export const BOProduct: FC = () => {
   };
 
   const navigateBack = () => history.goBack();
-  const navigateToProducts = () => history.push('/');
+  const navigateToProducts = () => history.push('/products');
 
   const onSave = () => {
     if (product) {
@@ -94,38 +98,62 @@ export const BOProduct: FC = () => {
 
   return (
     <>
-      <h1>Edit product</h1>
+      <BOPageTitle title="Edit Product" backgroundImageUrl={IMAGE_URL} />
+
       {modifiedProduct && (
-        <form onSubmit={onSave}>
+        <form className="pageForm" onSubmit={onSave}>
           {modifiedProduct.id && (
-            <div>
-              <label>
-                Id:&nbsp;
-                <input type="text" value={modifiedProduct.id} disabled />
-              </label>
+            <div className="formField">
+              <div className="formLabel">
+                <label>Id</label>
+              </div>
+              <input className="formInput" type="text" value={modifiedProduct.id} disabled />
             </div>
           )}
-          <div>
-            <label>
-              Name:&nbsp;
-              <input type="text" name="name" value={modifiedProduct.name} onChange={onFieldChange} />
-            </label>
+          <div className="formField">
+            <div className="formLabel">
+              <label>Name</label>
+            </div>
+            <input
+              className="formInput"
+              type="text"
+              name="name"
+              value={modifiedProduct.name}
+              onChange={onFieldChange}
+            />
           </div>
-          <div>
-            <label>
-              Price:&nbsp;
-              <input type="text" name="price" value={modifiedProduct.price} onChange={onFieldChange} />
-            </label>
+          <div className="formField">
+            <div className="formLabel">
+              <label>Price</label>
+            </div>
+            <input
+              className="formInput"
+              type="text"
+              name="price"
+              value={modifiedProduct.price}
+              onChange={onFieldChange}
+            />
           </div>
-          <div>
-            <label>
-              Photo:&nbsp;
-              <input type="text" name="photo" value={modifiedProduct.photo} onChange={onFieldChange} />
-            </label>
+          <div className="formField">
+            <div className="formLabel">
+              <label>Photo</label>
+            </div>
+            <input
+              className="formInput"
+              type="text"
+              name="photo"
+              value={modifiedProduct.photo}
+              onChange={onFieldChange}
+            />
           </div>
-          <hr />
-          <button type="submit">Save</button>&nbsp;
-          {productId && <button onClick={onDelete}>Delete</button>}
+          <button className="formButton" type="submit">
+            Save
+          </button>
+          {productId && (
+            <button className="formButton" onClick={onDelete}>
+              Delete
+            </button>
+          )}
         </form>
       )}
     </>
