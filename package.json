@@ -22,13 +22,14 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "start": "json-server src/db/db.json --static ./build",
+    "start": "node server.js",
     "dev": "concurrently \"react-scripts start\" \"json-server --watch src/db/db.json --port 3001\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "create-db": "node src/db/index.js",
     "eject": "react-scripts eject"
   },
+  "proxy": "localhost://3001", 
   "eslintConfig": {
     "extends": "react-app"
   },
