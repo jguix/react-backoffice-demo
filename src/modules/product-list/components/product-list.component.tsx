@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useCallback } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { ApplicationStore } from '../../../store/store';
 import { productCommands } from '../../product/product.commands';
@@ -25,17 +25,11 @@ export const BOProductList: FC = () => {
   const [page, setPage] = useState(1);
   const {isBottom} = useInfiniteScroll();
 
-  const incrementPage = useCallback(() => {
-    setPage(page + 1);
-  }, [page]);
-  
-  const createProduct = () => history.push('/product');
-
   useEffect(() => {
     if (isBottom) {
       incrementPage();
     }
-  }, [isBottom, incrementPage]);
+  }, [isBottom]);
 
   useEffect(() => {
     setLoading(true);
@@ -47,6 +41,13 @@ export const BOProductList: FC = () => {
       () => setError(true)
     );
   }, [page]);
+
+
+  const incrementPage = () => {
+    setPage(page + 1);
+  };
+  
+  const createProduct = () => history.push('/product');
 
   return (
     <>

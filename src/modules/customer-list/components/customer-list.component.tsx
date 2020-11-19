@@ -10,6 +10,7 @@ import '../../../theme/index.scss';
 import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 
 const LIMIT = 10;
+const SCROLL_BOTTOM_LIMIT = 50;
 const IMAGE_URL = 'https://bit.ly/33sx3Vu';
 
 export const BOCustomerList: FC = () => {
@@ -25,17 +26,11 @@ export const BOCustomerList: FC = () => {
   const [page, setPage] = useState(1);
   const {isBottom} = useInfiniteScroll();
 
-  const incrementPage = useCallback(() => {
-    setPage(page + 1);
-  }, [page]);
-  
-  const createCustomer = () => history.push('/customer');
-
   useEffect(() => {
     if (isBottom) {
       incrementPage();
     }
-  }, [isBottom, incrementPage]);
+  }, [isBottom]);
 
   useEffect(() => {
     setLoading(true);
@@ -47,6 +42,12 @@ export const BOCustomerList: FC = () => {
       () => setError(true)
     );
   }, [page]);
+
+  const incrementPage = () => {
+    setPage(page + 1);
+  };
+  
+  const createCustomer = () => history.push('/customer');
 
   return (
     <>
