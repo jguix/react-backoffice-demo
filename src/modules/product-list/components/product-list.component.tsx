@@ -9,6 +9,7 @@ import { BOPageTitle } from '../../shared/components/page-header.component';
 import '../../../theme/index.scss';
 
 const LIMIT = 10;
+const SCROLL_BOTTOM_LIMIT = 50;
 const IMAGE_URL = 'https://bit.ly/2StaKsy';
 
 export const BOProductList: FC = () => {
@@ -22,6 +23,18 @@ export const BOProductList: FC = () => {
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [page, setPage] = useState(1);
+  const [isBottom, setIsBottom] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (isBottom) {
+      incrementPage();
+    }
+  }, [isBottom]);
 
   useEffect(() => {
     setLoading(true);
@@ -34,7 +47,23 @@ export const BOProductList: FC = () => {
     );
   }, [page]);
 
-  const incrementPage = () => setPage(page + 1);
+  const handleScroll = () => {
+    const scrollTop = (document.documentElement
+      && document.documentElement.scrollTop)
+      || document.body.scrollTop;
+    const scrollHeight = (document.documentElement
+      && document.documentElement.scrollHeight)
+      || document.body.scrollHeight;
+    if (scrollTop + window.innerHeight + SCROLL_BOTTOM_LIMIT >= scrollHeight){
+      setIsBottom(true);
+    }
+  }
+
+  const incrementPage = () => {
+    setPage(page + 1);
+    setIsBottom(false);
+  }
+  
   const createProduct = () => history.push('/product');
 
   return (
@@ -53,9 +82,7 @@ export const BOProductList: FC = () => {
         </div>
 
         {products?.length > 0 && (
-          <div>
-            {isLoading ? <div>Loading products...</div> : <button onClick={incrementPage}>Load next {LIMIT}</button>}
-          </div>
+          isLoading && <div>Loading products...</div>
         )}
       </div>
     </>
