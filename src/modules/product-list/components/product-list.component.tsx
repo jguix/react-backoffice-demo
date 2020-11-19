@@ -56,12 +56,13 @@ export const BOProductList: FC = () => {
       || document.body.scrollHeight;
     if (scrollTop + window.innerHeight + SCROLL_BOTTOM_LIMIT >= scrollHeight){
       setIsBottom(true);
+    } else {
+      setIsBottom(false);
     }
   }
 
   const incrementPage = () => {
     setPage(page + 1);
-    setIsBottom(false);
   }
   
   const createProduct = () => history.push('/product');
