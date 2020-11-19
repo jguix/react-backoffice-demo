@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { ApplicationStore } from '../../../store/store';
 import { productCommands } from '../../product/product.commands';
@@ -7,9 +7,9 @@ import { BOProductListItem } from './product-list-item.component';
 import { useHistory } from 'react-router-dom';
 import { BOPageTitle } from '../../shared/components/page-header.component';
 import '../../../theme/index.scss';
+import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 
 const LIMIT = 10;
-const SCROLL_BOTTOM_LIMIT = 50;
 const IMAGE_URL = 'https://bit.ly/2StaKsy';
 
 export const BOProductList: FC = () => {
@@ -23,18 +23,19 @@ export const BOProductList: FC = () => {
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [page, setPage] = useState(1);
-  const [isBottom, setIsBottom] = useState(false);
+  const {isBottom} = useInfiniteScroll();
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const incrementPage = useCallback(() => {
+    setPage(page + 1);
+  }, [page]);
+  
+  const createProduct = () => history.push('/product');
 
   useEffect(() => {
     if (isBottom) {
       incrementPage();
     }
-  }, [isBottom]);
+  }, [isBottom, incrementPage]);
 
   useEffect(() => {
     setLoading(true);
@@ -46,26 +47,6 @@ export const BOProductList: FC = () => {
       () => setError(true)
     );
   }, [page]);
-
-  const handleScroll = () => {
-    const scrollTop = (document.documentElement
-      && document.documentElement.scrollTop)
-      || document.body.scrollTop;
-    const scrollHeight = (document.documentElement
-      && document.documentElement.scrollHeight)
-      || document.body.scrollHeight;
-    if (scrollTop + window.innerHeight + SCROLL_BOTTOM_LIMIT >= scrollHeight){
-      setIsBottom(true);
-    } else {
-      setIsBottom(false);
-    }
-  }
-
-  const incrementPage = () => {
-    setPage(page + 1);
-  }
-  
-  const createProduct = () => history.push('/product');
 
   return (
     <>

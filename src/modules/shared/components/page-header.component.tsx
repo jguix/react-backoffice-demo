@@ -9,7 +9,7 @@ type Props = {
 export const BOPageTitle: FC<Props> = ({ title, backgroundImageUrl = 'http://lorempixel.com/1500/1000' }) => {
   return (
     <div className="pageHeader">
-      <img className="pageImage" src={backgroundImageUrl} />
+      <img alt="page header hero" className="pageImage" src={backgroundImageUrl} />
       <div className="pageTitle">{title}</div>
     </div>
   );
