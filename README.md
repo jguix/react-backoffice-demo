@@ -1,7 +1,7 @@
 This project is a simple demo of a React backoffice system with the following features:
 
 - Public login page and private pages
-- CRUD pages for customers and products, with pagination and data caching
+- CRUD pages for customers and products, with infinite scroll pagination
 
 It can be used as a seed for other projects, since it is very unopinionated. Only React and a few libraries have been used. The included technologies and libraries are:
 
@@ -14,6 +14,7 @@ It can be used as a seed for other projects, since it is very unopinionated. Onl
 It uses [JSON-Server](https://github.com/typicode/json-server) as a mocked backend server and [Faker](https://github.com/marak/Faker.js) for database generation.
 
 Online demo available at:
+
 https://react-backoffice-demo.herokuapp.com/
 
 ## Installation
