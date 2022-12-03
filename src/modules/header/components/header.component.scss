@@ -24,7 +24,6 @@
 }
 
 .buttonLink {
-  background: none !important;
   border: none;
   padding: 0 !important;
   font-family: Exo-2, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
@@ -34,4 +33,9 @@
   color: rgba(0, 0, 0, 0.5);
   text-decoration: none;
   cursor: pointer;
+}
+
+a.selected,
+a.selected:visited {
+  color: #3eb1c8;
 }
