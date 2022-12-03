@@ -1,10 +1,13 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 
 test('should render login page by default', () => {
-  const { container } = render(<App />);
-  const h1 = container.querySelector('h1');
-  expect(h1).toBeInTheDocument();
-  expect(h1).toHaveTextContent('Login');
+  render(<App />);
+
+  expect(screen.getByText('backoffice')).toBeInTheDocument();
+  expect(screen.getByText('Start Session')).toBeInTheDocument();
+  expect(screen.getByText('Email')).toBeInTheDocument();
+  expect(screen.getByText('Password')).toBeInTheDocument();
+  expect(screen.getByRole('button').textContent).toBe('Login');
 });
