@@ -1,20 +1,24 @@
-import React, { FC, useState, useEffect, useCallback } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { ApplicationStore } from '../../../store/store';
 import { customerCommands } from '../../customer/customer.commands';
 import { Customer } from '../../customer/customer.types';
 import { BOCustomerListItem } from './customer-list-item.component';
 import { useHistory } from 'react-router-dom';
-import { BOPageTitle } from '../../shared/components/page-header.component';
+import { BOPageHeader } from '../../shared/components/page-header.component';
 import '../../../theme/index.scss';
 import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 
-const LIMIT = 10;
-const SCROLL_BOTTOM_LIMIT = 50;
-const IMAGE_URL = 'https://bit.ly/33sx3Vu';
+const HEADER_IMAGE_URL = 'https://bit.ly/33sx3Vu';
+const HEADER_HEIGHT = 430;
+const LIST_ITEM_HEIGHT = 62;
 
 export const BOCustomerList: FC = () => {
   const history = useHistory();
+  const { height } = useWindowDimensions();
+
+  const limit = useMemo(() => (height - HEADER_HEIGHT) / LIST_ITEM_HEIGHT + 1, [height]);
 
   const customers = useSelector<ApplicationStore, Customer[]>((state) => {
     const customerIds = state.ui.customerList.customerIds;
@@ -24,7 +28,7 @@ export const BOCustomerList: FC = () => {
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [page, setPage] = useState(1);
-  const {isBottom} = useInfiniteScroll();
+  const { isBottom } = useInfiniteScroll();
 
   useEffect(() => {
     if (isBottom) {
@@ -37,7 +41,7 @@ export const BOCustomerList: FC = () => {
     if (page === 1) {
       customerCommands.clearCustomers();
     }
-    customerCommands.loadCustomers(page, LIMIT).then(
+    customerCommands.loadCustomers(page, limit).then(
       () => setLoading(false),
       () => setError(true)
     );
@@ -46,12 +50,12 @@ export const BOCustomerList: FC = () => {
   const incrementPage = () => {
     setPage(page + 1);
   };
-  
+
   const createCustomer = () => history.push('/customer');
 
   return (
     <>
-      <BOPageTitle title="Customers" backgroundImageUrl={IMAGE_URL} />
+      <BOPageHeader title="Customers" backgroundImageUrl={HEADER_IMAGE_URL} />
       <div className="page">
         <button onClick={createCustomer}>Create customer</button>
 
@@ -64,9 +68,7 @@ export const BOCustomerList: FC = () => {
           ))}
         </div>
 
-        {customers?.length > 0 && (
-            isLoading && <div>Loading customers...</div> 
-        )}
+        {customers?.length > 0 && isLoading && <div>Loading customers...</div>}
       </div>
     </>
   );

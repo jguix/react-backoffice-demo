@@ -1,19 +1,24 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { ApplicationStore } from '../../../store/store';
 import { productCommands } from '../../product/product.commands';
 import { Product } from '../../product/product.types';
 import { BOProductListItem } from './product-list-item.component';
 import { useHistory } from 'react-router-dom';
-import { BOPageTitle } from '../../shared/components/page-header.component';
+import { BOPageHeader } from '../../shared/components/page-header.component';
 import '../../../theme/index.scss';
 import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 
-const LIMIT = 10;
-const IMAGE_URL = 'https://bit.ly/2StaKsy';
+const HEADER_IMAGE_URL = 'https://bit.ly/2StaKsy';
+const HEADER_HEIGHT = 430;
+const LIST_ITEM_HEIGHT = 48;
 
 export const BOProductList: FC = () => {
   const history = useHistory();
+  const { height } = useWindowDimensions();
+
+  const limit = useMemo(() => (height - HEADER_HEIGHT) / LIST_ITEM_HEIGHT + 1, [height]);
 
   const products = useSelector<ApplicationStore, Product[]>((state) => {
     const productIds = state.ui.productList.productIds;
@@ -23,7 +28,7 @@ export const BOProductList: FC = () => {
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [page, setPage] = useState(1);
-  const {isBottom} = useInfiniteScroll();
+  const { isBottom } = useInfiniteScroll();
 
   useEffect(() => {
     if (isBottom) {
@@ -36,22 +41,21 @@ export const BOProductList: FC = () => {
     if (page === 1) {
       productCommands.clearProducts();
     }
-    productCommands.loadProducts(page, LIMIT).then(
+    productCommands.loadProducts(page, limit).then(
       () => setLoading(false),
       () => setError(true)
     );
   }, [page]);
 
-
   const incrementPage = () => {
     setPage(page + 1);
   };
-  
+
   const createProduct = () => history.push('/product');
 
   return (
     <>
-      <BOPageTitle title="Products" backgroundImageUrl={IMAGE_URL} />
+      <BOPageHeader title="Products" backgroundImageUrl={HEADER_IMAGE_URL} />
       <div className="page">
         <button onClick={createProduct}>Create product</button>
 
@@ -64,9 +68,7 @@ export const BOProductList: FC = () => {
           ))}
         </div>
 
-        {products?.length > 0 && (
-          isLoading && <div>Loading products...</div>
-        )}
+        {products?.length > 0 && isLoading && <div>Loading products...</div>}
       </div>
     </>
   );

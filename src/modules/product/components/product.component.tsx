@@ -5,10 +5,10 @@ import { ApplicationStore } from '../../../store/store';
 import { Product } from '../../product/product.types';
 import { productCommands } from '../product.commands';
 import { useHistory } from 'react-router-dom';
-import { BOPageTitle } from '../../shared/components/page-header.component';
+import { BOPageHeader } from '../../shared/components/page-header.component';
 import '../../../theme/index.scss';
 
-const IMAGE_URL = 'https://bit.ly/2GyBHs6';
+const HEADER_IMAGE_URL = 'https://bit.ly/2GyBHs6';
 
 export const BOProduct: FC = () => {
   const history = useHistory();
@@ -98,7 +98,7 @@ export const BOProduct: FC = () => {
 
   return (
     <>
-      <BOPageTitle title="Edit Product" backgroundImageUrl={IMAGE_URL} />
+      <BOPageHeader title="Edit Product" backgroundImageUrl={HEADER_IMAGE_URL} />
 
       {modifiedProduct && (
         <form className="pageForm" onSubmit={onSave}>
