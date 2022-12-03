@@ -1,6 +1,6 @@
 var fs = require('fs');
-var faker = require('faker/locale/es');
-faker.locale = 'es';
+var faker = require('faker/locale/en');
+faker.locale = 'en';
 
 let customers = [];
 let products = [];
@@ -27,7 +27,7 @@ for (let i = 1; i <= 500; i++) {
 
 const data = {
   customers,
-  products
+  products,
 };
 
 fs.writeFile('src/db/db.json', JSON.stringify(data, null, 2), (err) => {
