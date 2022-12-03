@@ -32,7 +32,7 @@ export const BOCustomerList: FC = () => {
 
   useEffect(() => {
     if (isBottom) {
-      incrementPage();
+      setPage((page) => page + 1);
     }
   }, [isBottom]);
 
@@ -45,11 +45,7 @@ export const BOCustomerList: FC = () => {
       () => setLoading(false),
       () => setError(true)
     );
-  }, [page]);
-
-  const incrementPage = () => {
-    setPage(page + 1);
-  };
+  }, [page, limit]);
 
   const createCustomer = () => history.push('/customer');
 
