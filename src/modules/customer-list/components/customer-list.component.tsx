@@ -5,7 +5,7 @@ import { customerCommands } from '../../customer/customer.commands';
 import { Customer } from '../../customer/customer.types';
 import { BOCustomerListItem } from './customer-list-item.component';
 import { useHistory } from 'react-router-dom';
-import { BOPageHeader } from '../../shared/components/page-header.component';
+import { BOHero } from '../../shared/components/hero.component';
 import '../../../theme/index.scss';
 import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
@@ -51,7 +51,7 @@ export const BOCustomerList: FC = () => {
 
   return (
     <>
-      <BOPageHeader title="Customers" backgroundImageUrl={HEADER_IMAGE_URL} />
+      <BOHero title="Customers" backgroundImageUrl={HEADER_IMAGE_URL} />
       <div className="page">
         <button onClick={createCustomer}>Create customer</button>
 

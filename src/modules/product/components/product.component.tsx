@@ -5,7 +5,7 @@ import { ApplicationStore } from '../../../store/store';
 import { Product } from '../../product/product.types';
 import { productCommands } from '../product.commands';
 import { useHistory } from 'react-router-dom';
-import { BOPageHeader } from '../../shared/components/page-header.component';
+import { BOHero } from '../../shared/components/hero.component';
 import '../../../theme/index.scss';
 
 const HEADER_IMAGE_URL = 'https://bit.ly/2GyBHs6';
@@ -98,7 +98,7 @@ export const BOProduct: FC = () => {
 
   return (
     <>
-      <BOPageHeader title="Edit Product" backgroundImageUrl={HEADER_IMAGE_URL} />
+      <BOHero title="Edit Product" backgroundImageUrl={HEADER_IMAGE_URL} />
 
       {modifiedProduct && (
         <form className="pageForm" onSubmit={onSave}>

@@ -5,7 +5,7 @@ import { ApplicationStore } from '../../../store/store';
 import { Customer } from '../../customer/customer.types';
 import { customerCommands } from '../customer.commands';
 import { useHistory } from 'react-router-dom';
-import { BOPageHeader } from '../../shared/components/page-header.component';
+import { BOHero } from '../../shared/components/hero.component';
 import '../../../theme/index.scss';
 
 const HEADER_IMAGE_URL = 'https://bit.ly/33uC3J9';
@@ -98,7 +98,7 @@ export const BOCustomer: FC = () => {
 
   return (
     <>
-      <BOPageHeader title="Edit Customer" backgroundImageUrl={HEADER_IMAGE_URL} />
+      <BOHero title="Edit Customer" backgroundImageUrl={HEADER_IMAGE_URL} />
 
       {modifiedCustomer && (
         <form className="pageForm" onSubmit={onSave}>

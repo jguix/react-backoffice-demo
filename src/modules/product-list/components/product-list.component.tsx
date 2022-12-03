@@ -5,7 +5,7 @@ import { productCommands } from '../../product/product.commands';
 import { Product } from '../../product/product.types';
 import { BOProductListItem } from './product-list-item.component';
 import { useHistory } from 'react-router-dom';
-import { BOPageHeader } from '../../shared/components/page-header.component';
+import { BOHero } from '../../shared/components/hero.component';
 import '../../../theme/index.scss';
 import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
@@ -51,7 +51,7 @@ export const BOProductList: FC = () => {
 
   return (
     <>
-      <BOPageHeader title="Products" backgroundImageUrl={HEADER_IMAGE_URL} />
+      <BOHero title="Products" backgroundImageUrl={HEADER_IMAGE_URL} />
       <div className="page">
         <button onClick={createProduct}>Create product</button>
 
