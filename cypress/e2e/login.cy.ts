@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 describe('login page', () => {
   it('logs in the app', () => {
     cy.visit('http://localhost:3000/#/login');
