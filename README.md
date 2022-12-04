@@ -13,10 +13,6 @@ It can be used as a seed for other projects, since it is very unopinionated. Onl
 
 It uses [JSON-Server](https://github.com/typicode/json-server) as a mocked backend server and [Faker](https://github.com/marak/Faker.js) for database generation.
 
-Online demo available at:
-
-https://react-backoffice-demo.herokuapp.com/
-
 ## Installation
 
 Just run from the project directory:
