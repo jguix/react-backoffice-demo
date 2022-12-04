@@ -16,23 +16,21 @@ export const BOLogin: FC = () => {
         <div className="boTitle">backoffice</div>
 
         <div className="loginForm">
-          <form>
-            <div className="loginTitle">Start Session</div>
+          <div className="loginTitle">Start Session</div>
 
-            <div className="loginLabel">
-              <label>Email</label>
-            </div>
-            <input data-testid="login-username-input" className="loginField" type="text" name="username" />
+          <div className="loginLabel">
+            <label>Email</label>
+          </div>
+          <input data-testid="login-username-input" className="loginField" type="text" name="username" />
 
-            <div className="loginLabel">
-              <label>Password</label>
-            </div>
-            <input data-testid="login-password-input" className="loginField" type="password" name="password" />
+          <div className="loginLabel">
+            <label>Password</label>
+          </div>
+          <input data-testid="login-password-input" className="loginField" type="password" name="password" />
 
-            <button data-testid="login-button" className="loginButton" onClick={login}>
-              Login
-            </button>
-          </form>
+          <button data-testid="login-button" className="loginButton" onClick={login}>
+            Login
+          </button>
         </div>
       </div>
     </div>
