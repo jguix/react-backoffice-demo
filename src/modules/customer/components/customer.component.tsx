@@ -1,17 +1,16 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ApplicationStore } from '../../../store/store';
 import { Customer } from '../../customer/customer.types';
 import { customerCommands } from '../customer.commands';
-import { useHistory } from 'react-router-dom';
 import { BOHero } from '../../shared/components/hero.component';
 import '../../../theme/index.scss';
 
 const HEADER_IMAGE_URL = 'https://bit.ly/33uC3J9';
 
 export const BOCustomer: FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id: idString } = useParams<{ id: string }>();
   const customerId = (idString && parseInt(idString)) || undefined;
   const customer = useSelector<ApplicationStore, Customer | undefined>((state) => {
@@ -49,8 +48,8 @@ export const BOCustomer: FC = () => {
     modifiedCustomer && setModifiedCustomer({ ...modifiedCustomer, [field]: value });
   };
 
-  const navigateBack = () => history.goBack();
-  const navigateToCustomers = () => history.push('/customers');
+  const navigateBack = () => navigate(-1);
+  const navigateToCustomers = () => navigate('/customers');
 
   const onSave = () => {
     if (customer) {

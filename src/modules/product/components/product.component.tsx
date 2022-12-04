@@ -4,14 +4,14 @@ import { useParams } from 'react-router-dom';
 import { ApplicationStore } from '../../../store/store';
 import { Product } from '../../product/product.types';
 import { productCommands } from '../product.commands';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BOHero } from '../../shared/components/hero.component';
 import '../../../theme/index.scss';
 
 const HEADER_IMAGE_URL = 'https://bit.ly/2GyBHs6';
 
 export const BOProduct: FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id: idString } = useParams<{ id: string }>();
   const productId = (idString && parseInt(idString)) || undefined;
   const product = useSelector<ApplicationStore, Product | undefined>((state) => {
@@ -49,8 +49,8 @@ export const BOProduct: FC = () => {
     modifiedProduct && setModifiedProduct({ ...modifiedProduct, [field]: value });
   };
 
-  const navigateBack = () => history.goBack();
-  const navigateToProducts = () => history.push('/products');
+  const navigateBack = () => navigate(-1);
+  const navigateToProducts = () => navigate('/products');
 
   const onSave = () => {
     if (product) {

@@ -4,7 +4,7 @@ import { ApplicationStore } from '../../../store/store';
 import { productCommands } from '../../product/product.commands';
 import { Product } from '../../product/product.types';
 import { BOProductListItem } from './product-list-item.component';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BOHero } from '../../shared/components/hero.component';
 import '../../../theme/index.scss';
 import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
@@ -14,7 +14,7 @@ const HEADER_IMAGE_URL = 'https://bit.ly/2StaKsy';
 const LIST_ITEM_HEIGHT = 50;
 
 export const BOProductList: FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { height } = useWindowDimensions();
 
   const limit = useMemo(() => height / LIST_ITEM_HEIGHT, [height]);
@@ -46,7 +46,7 @@ export const BOProductList: FC = () => {
     );
   }, [page, limit]);
 
-  const createProduct = () => history.push('/product');
+  const createProduct = () => navigate('/product');
 
   return (
     <>

@@ -4,7 +4,7 @@ import { ApplicationStore } from '../../../store/store';
 import { customerCommands } from '../../customer/customer.commands';
 import { Customer } from '../../customer/customer.types';
 import { BOCustomerListItem } from './customer-list-item.component';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BOHero } from '../../shared/components/hero.component';
 import '../../../theme/index.scss';
 import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
@@ -14,7 +14,7 @@ const HEADER_IMAGE_URL = 'https://bit.ly/33sx3Vu';
 const LIST_ITEM_HEIGHT = 62;
 
 export const BOCustomerList: FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { height } = useWindowDimensions();
 
   const limit = useMemo(() => height / LIST_ITEM_HEIGHT, [height]);
@@ -46,7 +46,7 @@ export const BOCustomerList: FC = () => {
     );
   }, [page, limit]);
 
-  const createCustomer = () => history.push('/customer');
+  const createCustomer = () => navigate('/customer');
 
   return (
     <>

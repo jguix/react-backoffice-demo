@@ -1,14 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { Navigate, Route, RouteProps } from 'react-router-dom';
 import { ApplicationStore } from '../../../store/store';
 
-export const PrivateRoute: FC<RouteProps> = ({ component, ...rest }) => {
+type PropsWithChildren<P> = P & { children?: ReactNode | undefined };
+
+export const PrivateRoute: FC<PropsWithChildren<any>> = ({ children }) => {
   const isAuthenticated = useSelector<ApplicationStore, boolean>((state) => state.ui.auth.isAuthenticated);
 
-  return isAuthenticated ? (
-    <Route {...rest} component={component} />
-  ) : (
-    <Route {...rest} render={() => <Redirect to={'/login'} />} />
-  );
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 };

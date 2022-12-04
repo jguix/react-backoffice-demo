@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { authCommands } from '../auth.commands';
 import './login.component.scss';
 
 export const BOLogin: FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const login = () => {
-    authCommands.login().then(() => history.push('/'));
+    authCommands.login().then(() => navigate('/'));
   };
 
   return (

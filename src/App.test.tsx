@@ -10,20 +10,22 @@ import { store } from './store/store';
 import { authActions } from './modules/auth/auth.actions';
 import userEvent from '@testing-library/user-event';
 
-const server = setupServer(
-  rest.get('/customers', (_, res, ctx) => {
-    return res(ctx.json(customersMock));
+const handlers = [
+  rest.get('/customers', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(customersMock));
   }),
-  rest.get('/products', (_, res, ctx) => {
-    return res(ctx.json(productsMock));
-  })
-);
+  rest.get('/products', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(productsMock));
+  }),
+];
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+const server = setupServer(...handlers);
 
 describe('App', () => {
+  beforeAll(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
+
   describe('before logging in', () => {
     it('should render login page by default', () => {
       render(<App />);
@@ -35,7 +37,7 @@ describe('App', () => {
       expect(screen.getByRole('button').textContent).toBe('Login');
     });
 
-    it('should login and render customers page by default', async () => {
+    it('should login then render customers page by default', async () => {
       render(<App />);
       const emailInput = screen.getByTestId('login-username-input');
       const passwordInput = screen.getByTestId('login-password-input');
@@ -49,6 +51,53 @@ describe('App', () => {
       expect(screen.getByText('backoffice')).toBeInTheDocument();
       expect(screen.getByTestId('hero').textContent).toBe('Customers');
       expect(screen.getAllByRole('button')[1].textContent).toBe('Create customer');
+    });
+  });
+
+  describe('after logging in', () => {
+    it('should render customers page by default', () => {
+      render(<App />);
+
+      expect(screen.getByText('backoffice')).toBeInTheDocument();
+      expect(screen.getByTestId('hero').textContent).toBe('Customers');
+      expect(screen.getAllByRole('button')[1].textContent).toBe('Create customer');
+    });
+
+    it('should navigate to products page', async () => {
+      render(<App />);
+      const productsLink = screen.getByTestId('header-navigation-products');
+      userEvent.click(productsLink);
+
+      await waitFor(() => screen.getByTestId('product-list'));
+
+      expect(screen.getByText('backoffice')).toBeInTheDocument();
+      expect(screen.getByTestId('hero').textContent).toBe('Products');
+      expect(screen.getAllByRole('button')[1].textContent).toBe('Create product');
+    });
+
+    it('should navigate to customers page', async () => {
+      render(<App />);
+      const customersLink = screen.getByTestId('header-navigation-customers');
+      userEvent.click(customersLink);
+
+      await waitFor(() => screen.getByTestId('customer-list'));
+
+      expect(screen.getByText('backoffice')).toBeInTheDocument();
+      expect(screen.getByTestId('hero').textContent).toBe('Customers');
+      expect(screen.getAllByRole('button')[1].textContent).toBe('Create customer');
+    });
+
+    it('should logout', async () => {
+      render(<App />);
+      const logoutLink = screen.getByTestId('header-navigation-logout');
+      userEvent.click(logoutLink);
+
+      await waitFor(() => screen.getByTestId('login-username-input'));
+      expect(screen.getByText('backoffice')).toBeInTheDocument();
+      expect(screen.getByText('Start Session')).toBeInTheDocument();
+      expect(screen.getByText('Email')).toBeInTheDocument();
+      expect(screen.getByText('Password')).toBeInTheDocument();
+      expect(screen.getByRole('button').textContent).toBe('Login');
     });
   });
 });
