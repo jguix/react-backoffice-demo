@@ -55,16 +55,14 @@ export const BOCustomerList: FC = () => {
       <div className="page">
         <button onClick={createCustomer}>Create customer</button>
 
-        {isLoading && !customers?.length && <div>Loading customers...</div>}
-        {isError && <div>Error loading customers, please refresh page.</div>}
-
         <div className="list">
           {customers?.map((customer: Customer) => (
             <BOCustomerListItem key={customer.id} customer={customer} />
           ))}
         </div>
 
-        {customers?.length > 0 && isLoading && <div>Loading customers...</div>}
+        {isLoading && <div>Loading customers...</div>}
+        {isError && <div>Error loading customers, please refresh page.</div>}
       </div>
     </>
   );

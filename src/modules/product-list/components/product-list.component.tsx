@@ -55,16 +55,14 @@ export const BOProductList: FC = () => {
       <div className="page">
         <button onClick={createProduct}>Create product</button>
 
-        {isLoading && !products?.length && <div>Loading products...</div>}
-        {isError && <div>Error loading products, please refresh page.</div>}
-
         <div className="list">
           {products?.map((product: Product) => (
             <BOProductListItem key={product.id} product={product} />
           ))}
         </div>
 
-        {products?.length > 0 && isLoading && <div>Loading products...</div>}
+        {isLoading && <div>Loading products...</div>}
+        {isError && <div>Error loading products, please refresh page.</div>}
       </div>
     </>
   );
