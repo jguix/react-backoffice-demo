@@ -9,7 +9,7 @@ type Props = {
 
 export const BOProductListItem: FC<Props> = ({ product }) => {
   return (
-    <div className="listItem">
+    <div data-testid="product-list-item" className="listItem">
       <Link key={product.id} to={`/product/${product.id}`}>
         <div className="listTitle">{product.name}</div>
         <div className="listText">{product.price} €</div>

@@ -11,14 +11,13 @@ import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions';
 
 const HEADER_IMAGE_URL = 'https://bit.ly/33sx3Vu';
-const HEADER_HEIGHT = 430;
 const LIST_ITEM_HEIGHT = 62;
 
 export const BOCustomerList: FC = () => {
   const history = useHistory();
   const { height } = useWindowDimensions();
 
-  const limit = useMemo(() => (height - HEADER_HEIGHT) / LIST_ITEM_HEIGHT + 1, [height]);
+  const limit = useMemo(() => height / LIST_ITEM_HEIGHT, [height]);
 
   const customers = useSelector<ApplicationStore, Customer[]>((state) => {
     const customerIds = state.ui.customerList.customerIds;
@@ -55,14 +54,14 @@ export const BOCustomerList: FC = () => {
       <div className="page">
         <button onClick={createCustomer}>Create customer</button>
 
-        <div className="list">
+        <div data-testid="customer-list" className="list">
           {customers?.map((customer: Customer) => (
             <BOCustomerListItem key={customer.id} customer={customer} />
           ))}
         </div>
 
-        {isLoading && <div>Loading customers...</div>}
-        {isError && <div>Error loading customers, please refresh page.</div>}
+        {isLoading && <div data-testid="customer-list-loading">Loading customers...</div>}
+        {isError && <div data-testid="customer-list-error">Error loading customers, please refresh page.</div>}
       </div>
     </>
   );
