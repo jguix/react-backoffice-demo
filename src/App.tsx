@@ -14,65 +14,63 @@ import { BOProduct } from './modules/product/components/product.component';
 const App = () => {
   return (
     <Provider store={store}>
-      <HashRouter>
-        <div className="app">
-          <div className="appContent">
-            <BOHeader />
-            <Routes>
-              <Route path="/login" element={<BOLogin />} />
-              <Route
-                path="/customers"
-                element={
-                  <PrivateRoute>
-                    <BOCustomerList />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/customer/:id"
-                element={
-                  <PrivateRoute>
-                    <BOCustomer />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/customer"
-                element={
-                  <PrivateRoute>
-                    <BOCustomer />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/products"
-                element={
-                  <PrivateRoute>
-                    <BOProductList />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/product/:id"
-                element={
-                  <PrivateRoute>
-                    <BOProduct />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/product"
-                element={
-                  <PrivateRoute>
-                    <BOProduct />
-                  </PrivateRoute>
-                }
-              />
-              <Route path="/" element={<Navigate to={'/customers'} />}></Route>
-            </Routes>
-          </div>
+      <div className="app">
+        <div className="appContent">
+          <BOHeader />
+          <Routes>
+            <Route path="/login" element={<BOLogin />} />
+            <Route
+              path="/customers"
+              element={
+                <PrivateRoute>
+                  <BOCustomerList />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/customer/:id"
+              element={
+                <PrivateRoute>
+                  <BOCustomer />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/customer"
+              element={
+                <PrivateRoute>
+                  <BOCustomer />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/products"
+              element={
+                <PrivateRoute>
+                  <BOProductList />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/product/:id"
+              element={
+                <PrivateRoute>
+                  <BOProduct />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/product"
+              element={
+                <PrivateRoute>
+                  <BOProduct />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/" element={<Navigate to={'/customers'} />}></Route>
+          </Routes>
         </div>
-      </HashRouter>
+      </div>
     </Provider>
   );
 };
