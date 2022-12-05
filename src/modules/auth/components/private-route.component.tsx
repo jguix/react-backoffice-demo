@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Route, RouteProps } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { ApplicationStore } from '../../../store/store';
 
 type PropsWithChildren<P> = P & { children?: ReactNode | undefined };

@@ -1,7 +1,6 @@
 import { AnyAction } from 'redux';
 import { authReducer, AuthState } from './auth.reducer';
 import { authActions } from './auth.actions';
-import { AuthCredentials } from './auth.types';
 
 describe('Auth reducer', () => {
   describe('login', () => {

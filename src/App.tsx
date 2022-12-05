@@ -2,7 +2,7 @@ import React from 'react';
 import './App.scss';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
-import { Navigate, HashRouter, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './modules/auth/components/private-route.component';
 import { BOLogin } from './modules/auth/components/login.component';
 import { BOCustomerList } from './modules/customer-list/components/customer-list.component';

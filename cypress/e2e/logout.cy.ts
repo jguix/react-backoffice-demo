@@ -1,4 +1,3 @@
-/// <reference types="cypress" />
 describe('logout link', () => {
   const login = () => {
     cy.visit('http://localhost:3000/#/login');

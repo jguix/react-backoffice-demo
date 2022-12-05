@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
-import { Customer } from '../../customer/customer.types';
 import { Product } from '../../product/product.types';
 import { BOProductListItem } from './product-list-item.component';
 
