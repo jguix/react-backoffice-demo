@@ -10,7 +10,9 @@ export const BOHero: FC<Props> = ({ title, backgroundImageUrl = 'http://lorempix
   return (
     <div data-testid="hero" className="hero">
       <img alt="page header hero" className="pageImage" src={backgroundImageUrl} />
-      <div className="pageTitle">{title}</div>
+      <div data-testid="hero-title" className="pageTitle">
+        {title}
+      </div>
     </div>
   );
 };
