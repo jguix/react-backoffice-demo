@@ -22,6 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
     "create-db": "node src/db/index.js",
     "eject": "react-scripts eject"
   },
