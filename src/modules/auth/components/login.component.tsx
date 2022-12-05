@@ -16,7 +16,9 @@ export const BOLogin: FC = () => {
         <div className="boTitle">backoffice</div>
 
         <div className="loginForm">
-          <div className="loginTitle">Start Session</div>
+          <div data-testid="login-title" className="loginTitle">
+            Start Session
+          </div>
 
           <div className="loginLabel">
             <label>Email</label>

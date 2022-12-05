@@ -1,5 +1,12 @@
 /// <reference types="cypress" />
 describe('login page', () => {
+  it('displays login page by default', () => {
+    cy.visit('http://localhost:3000/#/');
+
+    cy.url().should('equal', 'http://localhost:3000/#/login');
+    cy.get('[data-testid="login-title"]').should('have.text', 'Start Session');
+  });
+
   it('logs in the app', () => {
     cy.visit('http://localhost:3000/#/login');
 
