@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -48,8 +48,12 @@ describe('Customer list', () => {
       </Provider>
     );
 
-    await waitFor(() => screen.getByTestId('customer-list-loading'), { timeout: 500 });
-    expect(screen.getByText('Loading customers...')).toBeInTheDocument();
+    await waitFor(() => screen.getByTestId('customer-list-loading'));
+    expect(screen.queryByTestId('customer-list-item')).not.toBeInTheDocument();
+    expect(screen.getByText('Loading customers...')).toBeVisible();
+
+    await waitForElementToBeRemoved(() => screen.getByTestId('customer-list-loading'));
+    expect(screen.getAllByTestId('customer-list-item').length).toBe(10);
   });
 
   it('should handle server error', async () => {
@@ -68,7 +72,8 @@ describe('Customer list', () => {
     );
 
     await waitFor(() => screen.getByTestId('customer-list-error'));
-    expect(screen.getByText('Error loading customers, please refresh page.')).toBeInTheDocument();
+    expect(screen.queryByTestId('customer-list-item')).not.toBeInTheDocument();
+    expect(screen.getByText('Error loading customers, please refresh page.')).toBeVisible();
   });
 });
 
