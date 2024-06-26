@@ -1,0 +1,12 @@
+.app {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.appContent {
+  background-color: #ffffff;
+  max-width: 1024px;
+  flex: 1;
+}
