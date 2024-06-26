@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { OrderType } from '../shared/shared.types';
-import { Product, ProductResults } from './product.types';
+import { OrderType, Result } from '../shared/shared.types';
+import { Product } from './product.types';
 
 const loadProducts = (page: number, limit: number, order: OrderType): Promise<Product[]> =>
-  axios.get<ProductResults>(`/products?_page=${page}&_per_page=${limit}&_sort=name&_order=${order}`).then(({ data }) => data.data);
+  axios.get<Result<Product>>(`/products?_page=${page}&_per_page=${limit}&_sort=name&_order=${order}`).then(({ data }) => data.data);
 
 const loadProduct = (productId: number): Promise<Product> =>
   axios.get(`/products/${productId}`).then(({ data }) => data);
