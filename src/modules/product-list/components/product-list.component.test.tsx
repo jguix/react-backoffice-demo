@@ -8,7 +8,7 @@ import { store } from '../../../store/store';
 import { BOProductList } from './product-list.component';
 
 const server = setupServer(
-  http.get('/products', ({ request, params, cookies }) => {
+  http.get('/products', () => {
     return HttpResponse.json(
       productsMock,
       {
@@ -40,7 +40,7 @@ describe('Product list', () => {
 
   it('should render the loading message while the query is not resolved', async () => {
     server.use(
-      http.get('/products', ({ request, params, cookies }) => {
+      http.get('/products', () => {
         return HttpResponse.json(
           productsMock,
           {
@@ -64,7 +64,7 @@ describe('Product list', () => {
 
   it('should handle server error', async () => {
     server.use(
-      http.get('/products', ({ request, params, cookies }) => {
+      http.get('/products', () => {
         return HttpResponse.json(
           {
             status: 500,

@@ -12,16 +12,18 @@ export type CustomerListStore = {
 
 export const customerIdsReducer = (state: number[] = [], action: AnyAction) => {
   switch (action.type) {
-    case CustomerActionTypes.LOAD_CUSTOMERS:
+    case CustomerActionTypes.LOAD_CUSTOMERS: {
       const { payload: loadCustomersPayload } = action as LoadCustomersAction;
       const { customers } = loadCustomersPayload;
       const customerIds = customers.map((customer) => customer.id);
       return arrayDistinct([...state, ...customerIds]);
+    }
 
-    case CustomerActionTypes.DELETE_CUSTOMER:
+    case CustomerActionTypes.DELETE_CUSTOMER: {
       const { payload: deleteCustomerPayload } = action as DeleteCustomerAction;
       const { customerId } = deleteCustomerPayload;
       return [...state.filter((id) => id !== customerId)];
+    }
 
     case CustomerActionTypes.CLEAR_CUSTOMERS:
       return [];

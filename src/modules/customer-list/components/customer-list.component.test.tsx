@@ -8,7 +8,7 @@ import { store } from '../../../store/store';
 import { BOCustomerList } from './customer-list.component';
 
 const server = setupServer(
-  http.get('/customers', ({ request, params, cookies }) => {
+  http.get('/customers', () => {
     return HttpResponse.json(
       customersMock,
       {
@@ -57,7 +57,7 @@ describe('Customer list', () => {
 
   it('should blah blah', async () => {
     server.use(
-      http.get('/customers', ({ request, params, cookies }) => {
+      http.get('/customers', () => {
         return HttpResponse.json(
           {
             status: 500,

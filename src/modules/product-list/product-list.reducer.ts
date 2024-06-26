@@ -12,16 +12,18 @@ export type ProductListStore = {
 
 export const productIdsReducer = (state: number[] = [], action: AnyAction) => {
   switch (action.type) {
-    case ProductActionTypes.LOAD_PRODUCTS:
+    case ProductActionTypes.LOAD_PRODUCTS: {
       const { payload: loadProductsPayload } = action as LoadProductsAction;
       const { products } = loadProductsPayload;
       const productIds = products.map((product) => product.id);
       return arrayDistinct([...state, ...productIds]);
+    }
 
-    case ProductActionTypes.DELETE_PRODUCT:
+    case ProductActionTypes.DELETE_PRODUCT: {
       const { payload: deleteProductPayload } = action as DeleteProductAction;
       const { productId } = deleteProductPayload;
       return [...state.filter((id) => id !== productId)];
+    }
 
     case ProductActionTypes.CLEAR_PRODUCTS:
       return [];
