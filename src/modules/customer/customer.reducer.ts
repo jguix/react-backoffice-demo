@@ -23,7 +23,10 @@ export const customerByIdReducer = (state: NumberIndexed<Customer> = {}, action:
     case CustomerActionTypes.LOAD_CUSTOMERS: {
       const { payload: loadCustomersPayload } = action as LoadCustomersAction;
       const { customers: loadedCustomers } = loadCustomersPayload;
-      const loadedCustomersMap = loadedCustomers.reduce((map, customer) => ({ ...map, [customer.id]: customer }), {});
+      const loadedCustomersMap = loadedCustomers.reduce(
+        (map, customer) => ({ ...map, [customer.id]: customer }),
+        {}
+      );
 
       return {
         ...state,

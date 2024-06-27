@@ -1,5 +1,9 @@
 import { AnyAction, combineReducers, Reducer } from 'redux';
-import { CustomerActionTypes, DeleteCustomerAction, LoadCustomersAction } from '../customer/customer.actions';
+import {
+  CustomerActionTypes,
+  DeleteCustomerAction,
+  LoadCustomersAction,
+} from '../customer/customer.actions';
 import { arrayDistinct } from '../shared/shared.domain';
 
 export type CustomerListState = {

@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 describe('login page', () => {
   it('displays login page by default', () => {
     cy.visit('http://localhost:5173/#/');

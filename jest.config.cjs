@@ -7,11 +7,9 @@ module.exports = {
   testEnvironment: 'jsdom',
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  moduleNameMapper:{
-    "\\.(css|less|scss|sass)$": "identity-obj-proxy" 
+  moduleNameMapper: {
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
-  transformIgnorePatterns: [
-    '/node_modules/(?!@bundled-es-modules|axios)',
-  ],
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  transformIgnorePatterns: ['/node_modules/(?!@bundled-es-modules|axios)'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };

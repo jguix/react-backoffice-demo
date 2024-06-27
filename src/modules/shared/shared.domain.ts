@@ -2,4 +2,5 @@ const repeatedItemsComparator = <T>(value: T, index: number, self: Array<T>): bo
   return self.indexOf(value) === index;
 };
 
-export const arrayDistinct = <T>(input: Array<T>): Array<T> => input.filter(repeatedItemsComparator);
+export const arrayDistinct = <T>(input: Array<T>): Array<T> =>
+  input.filter(repeatedItemsComparator);

@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 describe('products page', () => {
   const login = () => {
     cy.visit('http://localhost:5173/#/login');

@@ -23,7 +23,10 @@ export const productByIdReducer = (state: NumberIndexed<Product> = {}, action: A
     case ProductActionTypes.LOAD_PRODUCTS: {
       const { payload: loadProductsPayload } = action as LoadProductsAction;
       const { products: loadedProducts } = loadProductsPayload;
-      const loadedProductsMap = loadedProducts.reduce((map, product) => ({ ...map, [product.id]: product }), {});
+      const loadedProductsMap = loadedProducts.reduce(
+        (map, product) => ({ ...map, [product.id]: product }),
+        {}
+      );
 
       return {
         ...state,
@@ -41,7 +44,7 @@ export const productByIdReducer = (state: NumberIndexed<Product> = {}, action: A
       };
     }
 
-    case ProductActionTypes.SAVE_PRODUCT: {      
+    case ProductActionTypes.SAVE_PRODUCT: {
       const { payload: saveProductPayload } = action as SaveProductAction;
       const { productId: savedProductId, product: savedProduct } = saveProductPayload;
 

@@ -1,5 +1,9 @@
 import { AnyAction, combineReducers, Reducer } from 'redux';
-import { ProductActionTypes, DeleteProductAction, LoadProductsAction } from '../product/product.actions';
+import {
+  ProductActionTypes,
+  DeleteProductAction,
+  LoadProductsAction,
+} from '../product/product.actions';
 import { arrayDistinct } from '../shared/shared.domain';
 
 export type ProductListState = {
