@@ -1,29 +1,20 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
-import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import { store } from '../../../store/store';
 import { BOProductList } from './product-list.component';
 
-const server = setupServer(
-  http.get('/products', () => {
-    return HttpResponse.json(
-      productsMock,
-      {
-        status: 200,
-      },
-    )
-  }),
-);
+const mock = new MockAdapter(axios, { delayResponse: 500 });
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+beforeEach(() => {
+  mock.onGet(new RegExp('/products.*')).reply(200, productsMock);
+})
 
 describe('Product list', () => {
-  it('should render the customer list', async () => {
+  it('should render the product list', async () => {
     render(
       <Provider store={store}>
         <HashRouter>
@@ -31,47 +22,18 @@ describe('Product list', () => {
         </HashRouter>
       </Provider>
     );
+    await waitFor(() => screen.getByTestId('product-list-loading'));
+    expect(screen.queryByTestId('product-list-item')).not.toBeInTheDocument();
+    expect(screen.getByText('Loading products...')).toBeInTheDocument();
 
-    await waitFor(() => screen.getByTestId('product-list'));
+    await waitFor(() => screen.getAllByTestId('product-list-item'), { timeout: 1000 });
     expect(screen.getAllByTestId('product-list-item').length).toBe(10);
     expect(screen.queryByText('Loading products...')).not.toBeInTheDocument();
     expect(screen.queryByText('Error loading products, please refresh page.')).not.toBeInTheDocument();
   });
 
-  it('should render the loading message while the query is not resolved', async () => {
-    server.use(
-      http.get('/products', () => {
-        return HttpResponse.json(
-          productsMock,
-          {
-            status: 200,
-          },
-        )
-      }),
-    );
-
-    render(
-      <Provider store={store}>
-        <HashRouter>
-          <BOProductList />
-        </HashRouter>
-      </Provider>
-    );
-
-    await waitFor(() => screen.getByTestId('product-list-loading'), { timeout: 500 });
-    expect(screen.getByText('Loading products...')).toBeInTheDocument();
-  });
-
   it('should handle server error', async () => {
-    server.use(
-      http.get('/products', () => {
-        return HttpResponse.json(
-          {
-            status: 500,
-          },
-        )
-      }),
-    );
+    mock.onGet(new RegExp('/products.*')).reply(500);
 
     render(
       <Provider store={store}>
@@ -86,7 +48,8 @@ describe('Product list', () => {
   });
 });
 
-const productsMock = [
+const productsMock = {
+  data: [
   {
     id: 1,
     name: 'Handcrafted Rubber Chips',
@@ -147,4 +110,4 @@ const productsMock = [
     photo: 'http://placeimg.com/640/480/business',
     price: 881,
   },
-];
+]};

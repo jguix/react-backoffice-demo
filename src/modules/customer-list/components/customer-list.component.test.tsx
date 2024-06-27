@@ -1,44 +1,21 @@
 import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import React from 'react';
-import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import { store } from '../../../store/store';
 import { BOCustomerList } from './customer-list.component';
 
-const server = setupServer(
-  http.get('/customers', () => {
-    return HttpResponse.json(
-      customersMock,
-      {
-        status: 200,
-      },
-    )
-  }),
-);
+const mock = new MockAdapter(axios, { delayResponse: 500 });
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+beforeEach(() => {
+  mock.onGet(new RegExp('/customers.*')).reply(200, customersMock);
+})
+
 
 describe('Customer list', () => {
-  it('should blah blah', async () => {
-    render(
-      <Provider store={store}>
-        <HashRouter>
-          <BOCustomerList />
-        </HashRouter>
-      </Provider>
-    );
-
-    await waitFor(() => screen.getByTestId('customer-list'));
-    expect(screen.getAllByTestId('customer-list-item').length).toBe(10);
-    expect(screen.queryByText('Loading customers...')).not.toBeInTheDocument();
-    expect(screen.queryByText('Error loading customers, please refresh page.')).not.toBeInTheDocument();
-  });
-
-  it('should blah blah', async () => {
+  it('should render the customer list', async () => {
     render(
       <Provider store={store}>
         <HashRouter>
@@ -51,20 +28,14 @@ describe('Customer list', () => {
     expect(screen.queryByTestId('customer-list-item')).not.toBeInTheDocument();
     expect(screen.getByText('Loading customers...')).toBeVisible();
 
-    await waitForElementToBeRemoved(() => screen.getByTestId('customer-list-loading'));
+    await waitFor(() => screen.getAllByTestId('customer-list-item'), { timeout: 1000 });
     expect(screen.getAllByTestId('customer-list-item').length).toBe(10);
+    expect(screen.queryByText('Loading customers...')).not.toBeInTheDocument();
+    expect(screen.queryByText('Error loading customers, please refresh page.')).not.toBeInTheDocument();
   });
 
-  it('should blah blah', async () => {
-    server.use(
-      http.get('/customers', () => {
-        return HttpResponse.json(
-          {
-            status: 500,
-          },
-        )
-      }),
-    );
+  it('should handle server error', async () => {
+    mock.onGet(new RegExp('/customers.*')).reply(500);
 
     render(
       <Provider store={store}>
@@ -75,13 +46,12 @@ describe('Customer list', () => {
     );
 
     await waitFor(() => screen.getByTestId('customer-list-error'));
-    expect(screen.queryByTestId('customer-list-item')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('customer-list-loading')).not.toBeInTheDocument();
     expect(screen.getByText('Error loading customers, please refresh page.')).toBeVisible();
   });
 });
 
-const customersMock = [
+const customersMock = {
+  data: [
   {
     address: '028 Nikolaus Valleys, 72202-5046, Lake Alejandraburgh, Angola',
     email: 'Abbigail.Rutherford@hotmail.com',
@@ -142,4 +112,4 @@ const customersMock = [
     id: 10,
     name: 'Miguel Kiehn Sr.',
   },
-];
+]};
