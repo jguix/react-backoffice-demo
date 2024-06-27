@@ -9,7 +9,9 @@ export const BOHeader: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isAuthenticated = useSelector<ApplicationStore, boolean>((state) => state.ui.auth.isAuthenticated);
+  const isAuthenticated = useSelector<ApplicationStore, boolean>(
+    (state) => state.ui.auth.isAuthenticated
+  );
 
   const logout = () => {
     authCommands.logout().then(() => navigate('/login'));

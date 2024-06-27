@@ -5,7 +5,7 @@ import { productApi } from './product.api';
 import { Product } from './product.types';
 
 const clearProducts = (): Promise<void> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     store.dispatch(productActions.clearProductsAction());
     resolve();
   });
@@ -104,7 +104,7 @@ const updateProduct = (product: Product): Promise<void> => {
 const deleteProduct = (productId: number): Promise<void> => {
   return new Promise((resolve, reject) => {
     productApi.deleteProduct(productId).then(
-      (product) => {
+      () => {
         store.dispatch(
           productActions.deleteProductAction({
             productId,

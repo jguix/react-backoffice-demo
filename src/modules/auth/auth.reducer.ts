@@ -10,9 +10,12 @@ export type AuthStore = {
   auth: AuthState;
 };
 
-export const authReducer = (state: AuthState = { isAuthenticated: false, token: '' }, action: AnyAction) => {
+export const authReducer = (
+  state: AuthState = { isAuthenticated: false, token: '' },
+  action: AnyAction
+) => {
   switch (action.type) {
-    case AuthActionTypes.AUTH_LOGIN:
+    case AuthActionTypes.AUTH_LOGIN: {
       const { payload: loginPayload } = action as LoginAction;
       const { token } = loginPayload;
 
@@ -20,6 +23,7 @@ export const authReducer = (state: AuthState = { isAuthenticated: false, token: 
         isAuthenticated: true,
         token,
       };
+    }
 
     case AuthActionTypes.AUTH_LOGOUT:
       return {

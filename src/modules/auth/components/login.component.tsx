@@ -23,12 +23,22 @@ export const BOLogin: FC = () => {
           <div className="loginLabel">
             <label>Email</label>
           </div>
-          <input data-testid="login-username-input" className="loginField" type="text" name="username" />
+          <input
+            data-testid="login-username-input"
+            className="loginField"
+            type="text"
+            name="username"
+          />
 
           <div className="loginLabel">
             <label>Password</label>
           </div>
-          <input data-testid="login-password-input" className="loginField" type="password" name="password" />
+          <input
+            data-testid="login-password-input"
+            className="loginField"
+            type="password"
+            name="password"
+          />
 
           <button data-testid="login-button" className="loginButton" onClick={login}>
             Login

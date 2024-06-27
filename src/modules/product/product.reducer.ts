@@ -20,17 +20,21 @@ export type ProductStore = {
 
 export const productByIdReducer = (state: NumberIndexed<Product> = {}, action: AnyAction) => {
   switch (action.type) {
-    case ProductActionTypes.LOAD_PRODUCTS:
+    case ProductActionTypes.LOAD_PRODUCTS: {
       const { payload: loadProductsPayload } = action as LoadProductsAction;
       const { products: loadedProducts } = loadProductsPayload;
-      const loadedProductsMap = loadedProducts.reduce((map, product) => ({ ...map, [product.id]: product }), {});
+      const loadedProductsMap = loadedProducts.reduce(
+        (map, product) => ({ ...map, [product.id]: product }),
+        {}
+      );
 
       return {
         ...state,
         ...loadedProductsMap,
       };
+    }
 
-    case ProductActionTypes.LOAD_PRODUCT:
+    case ProductActionTypes.LOAD_PRODUCT: {
       const { payload: loadProductPayload } = action as LoadProductAction;
       const { product: loadedProduct } = loadProductPayload;
 
@@ -38,8 +42,9 @@ export const productByIdReducer = (state: NumberIndexed<Product> = {}, action: A
         ...state,
         [loadedProduct.id]: loadedProduct,
       };
+    }
 
-    case ProductActionTypes.SAVE_PRODUCT:
+    case ProductActionTypes.SAVE_PRODUCT: {
       const { payload: saveProductPayload } = action as SaveProductAction;
       const { productId: savedProductId, product: savedProduct } = saveProductPayload;
 
@@ -47,8 +52,9 @@ export const productByIdReducer = (state: NumberIndexed<Product> = {}, action: A
         ...state,
         [savedProductId]: { ...savedProduct, id: savedProductId },
       };
+    }
 
-    case ProductActionTypes.UPDATE_PRODUCT:
+    case ProductActionTypes.UPDATE_PRODUCT: {
       const { payload: updateProductPayload } = action as UpdateProductAction;
       const { product: updatedProduct } = updateProductPayload;
 
@@ -56,8 +62,9 @@ export const productByIdReducer = (state: NumberIndexed<Product> = {}, action: A
         ...state,
         [updatedProduct.id]: { ...updatedProduct },
       };
+    }
 
-    case ProductActionTypes.DELETE_PRODUCT:
+    case ProductActionTypes.DELETE_PRODUCT: {
       const { payload: deleteProductPayload } = action as DeleteProductAction;
       const { productId } = deleteProductPayload;
       const mutableState = { ...state };
@@ -66,6 +73,7 @@ export const productByIdReducer = (state: NumberIndexed<Product> = {}, action: A
       return {
         ...mutableState,
       };
+    }
   }
 
   return state;

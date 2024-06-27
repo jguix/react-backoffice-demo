@@ -5,7 +5,7 @@ import { customerApi } from './customer.api';
 import { Customer } from './customer.types';
 
 const clearCustomers = (): Promise<void> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     store.dispatch(customerActions.clearCustomersAction());
     resolve();
   });
@@ -104,7 +104,7 @@ const updateCustomer = (customer: Customer): Promise<void> => {
 const deleteCustomer = (customerId: number): Promise<void> => {
   return new Promise((resolve, reject) => {
     customerApi.deleteCustomer(customerId).then(
-      (customer) => {
+      () => {
         store.dispatch(
           customerActions.deleteCustomerAction({
             customerId,

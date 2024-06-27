@@ -61,7 +61,9 @@ export const BOCustomerList: FC = () => {
         </div>
 
         {isLoading && <div data-testid="customer-list-loading">Loading customers...</div>}
-        {isError && <div data-testid="customer-list-error">Error loading customers, please refresh page.</div>}
+        {isError && (
+          <div data-testid="customer-list-error">Error loading customers, please refresh page.</div>
+        )}
       </div>
     </>
   );

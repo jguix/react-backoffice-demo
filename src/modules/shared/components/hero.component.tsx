@@ -6,7 +6,10 @@ type Props = {
   backgroundImageUrl?: string;
 };
 
-export const BOHero: FC<Props> = ({ title, backgroundImageUrl = 'http://lorempixel.com/1500/1000' }) => {
+export const BOHero: FC<Props> = ({
+  title,
+  backgroundImageUrl = 'http://lorempixel.com/1500/1000',
+}) => {
   return (
     <div data-testid="hero" className="hero">
       <img alt="page header hero" className="pageImage" src={backgroundImageUrl} />

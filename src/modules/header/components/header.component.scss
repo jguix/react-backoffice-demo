@@ -9,7 +9,7 @@
   font-weight: 500;
   padding-top: 32px;
   padding-bottom: 24px;
-  padding-left: 24px;
+  padding: 24px;
 }
 
 .headerNavigation {
@@ -21,13 +21,26 @@
 
 .headerNavigationItem {
   margin-right: 12px;
+
+  &:last-child {
+    margin-right: 0;
+    justify-self: right;
+  }
 }
 
 .buttonLink {
   background: none !important;
   border: none;
   padding: 0 !important;
-  font-family: Exo-2, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+  font-family:
+    Exo-2,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica Neue,
+    Arial,
+    sans-serif;
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;

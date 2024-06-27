@@ -61,7 +61,9 @@ export const BOProductList: FC = () => {
         </div>
 
         {isLoading && <div data-testid="product-list-loading">Loading products...</div>}
-        {isError && <div data-testid="product-list-error">Error loading products, please refresh page.</div>}
+        {isError && (
+          <div data-testid="product-list-error">Error loading products, please refresh page.</div>
+        )}
       </div>
     </>
   );

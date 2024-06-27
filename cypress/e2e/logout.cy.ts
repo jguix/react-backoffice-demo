@@ -1,6 +1,7 @@
+/// <reference types="cypress" />
 describe('logout link', () => {
   const login = () => {
-    cy.visit('http://localhost:3000/#/login');
+    cy.visit('http://localhost:5173/#/login');
 
     cy.get('[data-testid="login-username-input"]').type('test@example.com');
     cy.get('[data-testid="login-password-input"]').type('123456');
@@ -12,7 +13,7 @@ describe('logout link', () => {
   });
 
   it('logs out the user to the login page', () => {
-    cy.visit('http://localhost:3000/#/');
+    cy.visit('http://localhost:5173/#/');
 
     cy.get('[data-testid="header-navigation-logout"]').click();
 

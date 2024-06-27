@@ -2,7 +2,10 @@ import { combineReducers, Reducer } from 'redux';
 import { createStore } from 'redux';
 import { productReducer, ProductStore } from '../modules/product/product.reducer';
 import { customerReducer, CustomerStore } from '../modules/customer/customer.reducer';
-import { customerListReducer, CustomerListStore } from '../modules/customer-list/customer-list.reducer';
+import {
+  customerListReducer,
+  CustomerListStore,
+} from '../modules/customer-list/customer-list.reducer';
 import { productListReducer, ProductListStore } from '../modules/product-list/product-list.reducer';
 import { authReducer, AuthStore } from '../modules/auth/auth.reducer';
 

@@ -20,17 +20,21 @@ export type CustomerStore = {
 
 export const customerByIdReducer = (state: NumberIndexed<Customer> = {}, action: AnyAction) => {
   switch (action.type) {
-    case CustomerActionTypes.LOAD_CUSTOMERS:
+    case CustomerActionTypes.LOAD_CUSTOMERS: {
       const { payload: loadCustomersPayload } = action as LoadCustomersAction;
       const { customers: loadedCustomers } = loadCustomersPayload;
-      const loadedCustomersMap = loadedCustomers.reduce((map, customer) => ({ ...map, [customer.id]: customer }), {});
+      const loadedCustomersMap = loadedCustomers.reduce(
+        (map, customer) => ({ ...map, [customer.id]: customer }),
+        {}
+      );
 
       return {
         ...state,
         ...loadedCustomersMap,
       };
+    }
 
-    case CustomerActionTypes.LOAD_CUSTOMER:
+    case CustomerActionTypes.LOAD_CUSTOMER: {
       const { payload: loadCustomerPayload } = action as LoadCustomerAction;
       const { customer: loadedCustomer } = loadCustomerPayload;
 
@@ -38,8 +42,9 @@ export const customerByIdReducer = (state: NumberIndexed<Customer> = {}, action:
         ...state,
         [loadedCustomer.id]: loadedCustomer,
       };
+    }
 
-    case CustomerActionTypes.SAVE_CUSTOMER:
+    case CustomerActionTypes.SAVE_CUSTOMER: {
       const { payload: saveCustomerPayload } = action as SaveCustomerAction;
       const { customerId: savedCustomerId, customer: savedCustomer } = saveCustomerPayload;
 
@@ -47,8 +52,9 @@ export const customerByIdReducer = (state: NumberIndexed<Customer> = {}, action:
         ...state,
         [savedCustomerId]: { ...savedCustomer, id: savedCustomerId },
       };
+    }
 
-    case CustomerActionTypes.UPDATE_CUSTOMER:
+    case CustomerActionTypes.UPDATE_CUSTOMER: {
       const { payload: updateCustomerPayload } = action as UpdateCustomerAction;
       const { customer: updatedCustomer } = updateCustomerPayload;
 
@@ -56,8 +62,9 @@ export const customerByIdReducer = (state: NumberIndexed<Customer> = {}, action:
         ...state,
         [updatedCustomer.id]: { ...updatedCustomer },
       };
+    }
 
-    case CustomerActionTypes.DELETE_CUSTOMER:
+    case CustomerActionTypes.DELETE_CUSTOMER: {
       const { payload: deleteCustomerPayload } = action as DeleteCustomerAction;
       const { customerId } = deleteCustomerPayload;
       const mutableState = { ...state };
@@ -66,6 +73,7 @@ export const customerByIdReducer = (state: NumberIndexed<Customer> = {}, action:
       return {
         ...mutableState,
       };
+    }
   }
 
   return state;
